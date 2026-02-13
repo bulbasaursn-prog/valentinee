@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be My Valentine? 💝</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #ff4757;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 400px;
+    }
+
+    button {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff8787;
+    }
+
+    .floating {
+      position: absolute;
+      font-size: 24px;
+      animation: float 15s linear infinite;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-10vh);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <h2 id="question">Do you like me?</h2>
+  <button onclick="yesClick()">Yes</button>
+  <button onclick="noClick()">No</button>
+</div>
+
+<script>
+  // === BASIC INFORMATION ===
+  const valentineName = "Stephanie";
+  const pageTitle = "Will You Be My Valentine? 💝";
+  document.title = pageTitle;
+
+  // === FLOATING EMOJIS ===
+  const hearts = ['❤️','💖','💝','💗','💓','🧸','🐻'];
+
+  function createFloatingEmoji() {
+    const span = document.createElement("span");
+    span.className = "floating";
+    span.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+    span.style.left = Math.random() * 100 + "vw";
+    span.style.animationDuration = (10 + Math.random() * 10) + "s";
+    document.body.appendChild(span);
+
+    setTimeout(() => span.remove(), 20000);
+  }
+
+  setInterval(createFloatingEmoji, 500);
+
+  // === QUESTIONS FLOW ===
+  let step = 1;
+
+  function yesClick() {
+    if (step === 1) {
+      document.getElementById("question").innerText =
+        "I don't like you, I love you! ❤️";
+      step = 2;
+    } else if (step === 2) {
+      document.getElementById("question").innerText =
+        "Yay! I'm the luckiest person...";
+      document.getElementById("card").innerHTML = `
+        <h2>Yay! 💖</h2>
+        <p>Now come get your gift... 🎁💝🤗</p>
+      `;
+    }
+  }
+
+  function noClick() {
+    alert("No is not an option 😏💘");
+  }
+</script>
+
+</body>
+</html>
